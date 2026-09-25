@@ -11,8 +11,9 @@
 # Output:
 #   On success: writes <filename>.bin next to the input file, then prints
 #               a classification line ("It is a QUIT program" / "It is an
-#               ADD/SUB program"), then "The content of the .bin file is",
-#               then every byte of the .bin file as lowercase hex, one per
+#               ADD/SUB program"), a "************" separator, then
+#               "The content of the .bin file", then every byte of the
+#               .bin file as lowercase hex (via `xxd -p -c 1`), one per
 #               line. Exits 0.
 #   On failure: prints the required error message to STDOUT and exits 1.
 #               No .bin file is produced.
@@ -169,10 +170,9 @@ if (( nvalues == 0 )); then
     write_bytes "$outfile" "${dataArray[@]}"
 
     echo "It is a QUIT program"
-    echo "The content of the .bin file is"
-    for byte in "${dataArray[@]}"; do
-        echo "$byte"
-    done
+    echo "************"
+    echo "The content of the .bin file"
+    xxd -p -c 1 "$outfile"
     exit 0
 fi
 
@@ -298,7 +298,6 @@ fi
 write_bytes "$outfile" "${dataArray[@]}"
 
 echo "It is an ADD/SUB program"
-echo "The content of the .bin file is"
-for byte in "${dataArray[@]}"; do
-    echo "$byte"
-done
+echo "************"
+echo "The content of the .bin file"
+xxd -p -c 1 "$outfile"
