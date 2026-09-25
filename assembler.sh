@@ -170,8 +170,7 @@ if (( nvalues == 0 )); then
     write_bytes "$outfile" "${dataArray[@]}"
 
     echo "It is a QUIT program"
-    echo "************"
-    echo "The content of the .bin file"
+    echo "The content of the .bin file is"
     xxd -p -c 1 "$outfile"
     exit 0
 fi
@@ -298,6 +297,5 @@ fi
 write_bytes "$outfile" "${dataArray[@]}"
 
 echo "It is an ADD/SUB program"
-echo "************"
-echo "The content of the .bin file"
+echo "The content of the .bin file is"
 xxd -p -c 1 "$outfile"
